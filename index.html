@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniInfo - Nowa Generacja Wyszukiwania</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 </head>
@@ -188,52 +188,53 @@
             </div>
         </div>
 
-        <!-- Global Report Modal -->
-        <div id="report-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center;">
-            <div class="report-panel" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; background: rgba(15, 24, 20, 0.95); border: 1px solid var(--crimson-red); border-radius: 20px; width: 90%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <p style="font-size: 16px; color: var(--crimson-red); font-weight: 800;">Zgłoś nieprawidłowe dane:</p>
-                    <button style="background: none; border: none; color: white; font-size: 28px; cursor: pointer; line-height: 1;" onclick="closeReportModal()">&times;</button>
-                </div>
-                
-                <div class="slider-container">
-                    <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">Wybierz salę:</span>
-                    <select id="modal-report-select" style="background: var(--bg-black); color: var(--text-primary); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; font-size: 14px; outline: none;" onchange="updateModalSliders()">
-                    </select>
-                </div>
-                
-                <div class="slider-container">
-                    <div class="slider-label-row">
-                        <span style="font-size: 12px;">Zajętość:</span>
-                        <span class="slider-value" id="modal-rep-val-O" style="font-size: 12px;">0%</span>
-                    </div>
-                    <input type="range" class="tech-range" id="modal-rep-O" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('O', this.value)">
-                </div>
+    </div>
 
-                <div class="slider-container">
-                    <div class="slider-label-row">
-                        <span style="font-size: 12px;">Szum:</span>
-                        <span class="slider-value" id="modal-rep-val-S" style="font-size: 12px;">0%</span>
-                    </div>
-                    <input type="range" class="tech-range" id="modal-rep-S" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('S', this.value)">
-                </div>
-
-                <div class="slider-container">
-                    <div class="slider-label-row">
-                        <span style="font-size: 12px;">Dynamika:</span>
-                        <span class="slider-value" id="modal-rep-val-D" style="font-size: 12px;">0%</span>
-                    </div>
-                    <input type="range" class="tech-range" id="modal-rep-D" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('D', this.value)">
-                </div>
-                
-                <button class="btn-search-primary" style="padding: 14px; font-size: 14px; margin-top: 10px; background-color: var(--crimson-red); color: white; box-shadow: 0 4px 15px rgba(248,113,113,0.4);" onclick="submitReportModal()">Wyślij poprawkę</button>
+    <!-- Global Report Modal (Moved outside app-wrapper for mobile Safari compatibility) -->
+    <div id="report-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center;">
+        <div class="report-panel" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; background: rgba(15, 24, 20, 0.95); border: 1px solid var(--crimson-red); border-radius: 20px; width: 90%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-size: 16px; color: var(--crimson-red); font-weight: 800;">Zgłoś nieprawidłowe dane:</p>
+                <button style="background: none; border: none; color: white; font-size: 28px; cursor: pointer; line-height: 1;" onclick="closeReportModal()">&times;</button>
             </div>
+            
+            <div class="slider-container">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">Wybierz salę:</span>
+                <select id="modal-report-select" style="background: var(--bg-black); color: var(--text-primary); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; font-size: 14px; outline: none;" onchange="updateModalSliders()">
+                </select>
+            </div>
+            
+            <div class="slider-container">
+                <div class="slider-label-row">
+                    <span style="font-size: 12px;">Zajętość:</span>
+                    <span class="slider-value" id="modal-rep-val-O" style="font-size: 12px;">0%</span>
+                </div>
+                <input type="range" class="tech-range" id="modal-rep-O" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('O', this.value)">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-label-row">
+                    <span style="font-size: 12px;">Szum:</span>
+                    <span class="slider-value" id="modal-rep-val-S" style="font-size: 12px;">0%</span>
+                </div>
+                <input type="range" class="tech-range" id="modal-rep-S" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('S', this.value)">
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-label-row">
+                    <span style="font-size: 12px;">Dynamika:</span>
+                    <span class="slider-value" id="modal-rep-val-D" style="font-size: 12px;">0%</span>
+                </div>
+                <input type="range" class="tech-range" id="modal-rep-D" min="0" max="1" step="0.05" value="0" oninput="updateModalRepVal('D', this.value)">
+            </div>
+            
+            <button class="btn-search-primary" style="padding: 14px; font-size: 14px; margin-top: 10px; background-color: var(--crimson-red); color: white; box-shadow: 0 4px 15px rgba(248,113,113,0.4);" onclick="submitReportModal()">Wyślij poprawkę</button>
         </div>
     </div>
 
     <!-- Script connection -->
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="data.js?v=3"></script>
+    <script src="app.js?v=3"></script>
 </body>
 
 </html>
