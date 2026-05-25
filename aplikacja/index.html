@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniInfo - Nowa Generacja Wyszukiwania</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- App Wrapper -->
+    <div class="app-wrapper">
+        <!-- Tło ze znakiem wodnym -->
+        <img src="mini_niebieski.png" class="watermark-bg" alt="watermark">
+
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="header-brand">
+                <img src="../../raport3/logo_mini.png" alt="Logo" class="mini-logo">
+                <span class="brand-title">MiniInfo</span>
+            </div>
+            <button class="btn-diag-toggle" onclick="toggleDiagnostic()" title="Konsola deweloperska">
+                <span class="gear-icon">⚙️</span>
+            </button>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="app-content" id="app-content-scroll">
+
+            <!-- SCREEN 1: PROFILE & SURVEY (ACTIVE BY DEFAULT) -->
+            <div class="app-screen active" id="screen-profile">
+                <!-- SURVEY VIEW -->
+                <div id="survey-view" style="display: flex; flex-direction: column; gap: 20px;">
+
+                    <!-- Hero Heading with Marker Highlight (Custom Human Look) -->
+                    <div class="screen-hero">
+                        <h2>Nowa generacja <br><span class="hero-highlight">szukania sal.</span></h2>
+                        <p>Zdefiniuj swoje potrzeby naukowe, a my dopasujemy idealną przestrzeń.</p>
+                    </div>
+
+                    <!-- Profile Presets (Capsule style) -->
+                    <div class="presets-section">
+                        <span class="section-label">Wybierz szybki profil:</span>
+                        <div class="profiles-group">
+                            <button class="btn btn-profile active" id="prof-badacz"
+                                onclick="selectPresetProfile('badacz')">
+                                <span>Cicha nauka</span>
+                            </button>
+                            <button class="btn btn-profile" id="prof-projektant"
+                                onclick="selectPresetProfile('projektant')">
+                                <span>Praca w grupie</span>
+                            </button>
+                            <button class="btn btn-profile" id="prof-konsultant"
+                                onclick="selectPresetProfile('konsultant')">
+                                <span>Relax</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Minimalistic Survey Cards (Wizard layout) -->
+                    <div class="survey-wizard">
+
+                        <!-- Question 1 -->
+                        <div class="survey-step" id="step-1">
+                            <div class="survey-card large-card">
+                                <span class="card-label">Krok 1 z 3</span>
+                                <h3>Główny cel wizyty</h3>
+                                <div class="minimal-options">
+                                    <button class="btn btn-opt" id="opt-1-A"
+                                        onclick="selectOption(1, 'A', 0.8, 0.1)">Cicha nauka indywidualna</button>
+                                    <button class="btn btn-opt" id="opt-1-B"
+                                        onclick="selectOption(1, 'B', 0.3, 0.5)">Zespołowa praca w grupie</button>
+                                    <button class="btn btn-opt" id="opt-1-C"
+                                        onclick="selectOption(1, 'C', 0.5, 0.4)">Odpoczynek / oczekiwanie</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="survey-step" id="step-2" style="display: none;">
+                            <div class="survey-card large-card">
+                                <span class="card-label">Krok 2 z 3</span>
+                                <h3>Wrażliwość na hałas</h3>
+                                <div class="minimal-options">
+                                    <button class="btn btn-opt" id="opt-2-A"
+                                        onclick="selectOption(2, 'A', 1.0, 0.0)">Wysoka (Absolutna cisza)</button>
+                                    <button class="btn btn-opt" id="opt-2-B"
+                                        onclick="selectOption(2, 'B', 0.6, 0.3)">Średnia (Dopuszczam cichy
+                                        szum)</button>
+                                    <button class="btn btn-opt" id="opt-2-C"
+                                        onclick="selectOption(2, 'C', 0.8, 0.7)">Niska (Hałas mi nie
+                                        przeszkadza)</button>
+                                </div>
+                                <button class="btn btn-back" onclick="goToStep(1)">← Wróć do poprzedniego
+                                    pytania</button>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="survey-step" id="step-3" style="display: none;">
+                            <div class="survey-card large-card">
+                                <span class="card-label">Krok 3 z 3</span>
+                                <h3>Tolerancja na ruch w sali</h3>
+                                <div class="minimal-options">
+                                    <button class="btn btn-opt" id="opt-3-A"
+                                        onclick="selectOption(3, 'A', 0.7, 0.1)">Niska (Ruch mnie rozprasza)</button>
+                                    <button class="btn btn-opt" id="opt-3-B"
+                                        onclick="selectOption(3, 'B', 0.4, 0.4)">Średnia (Dopuszczam
+                                        wejścia/wyjścia)</button>
+                                    <button class="btn btn-opt" id="opt-3-C"
+                                        onclick="selectOption(3, 'C', 0.1, 0.8)">Wysoka (Ruch jest mi obojętny)</button>
+                                </div>
+                                <button class="btn btn-back" onclick="goToStep(2)">← Wróć do poprzedniego
+                                    pytania</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!-- End survey-view -->
+
+                <!-- RESULTS VIEW -->
+                <div id="results-view" style="display: none; flex-direction: column; gap: 16px;">
+                    <button class="btn"
+                        style="align-self: flex-start; background: transparent; color: var(--text-secondary); border: none; font-size: 14px; font-weight: 800; padding: 0; cursor: pointer;"
+                        onclick="hideRecommendations()">
+                        ← Wróć do ankiety
+                    </button>
+                    <div class="screen-intro" style="margin-bottom: 0;">
+                        <h2>Najlepsze dopasowania</h2>
+                        <p>Sale idealne dla Twoich potrzeb, ułożone od najlepiej dopasowanej.</p>
+                    </div>
+                    <div class="rec-list" id="search-results-list">
+                        <!-- Cards render dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: MONITORING -->
+            <div class="app-screen" id="screen-monitoring">
+                <div class="screen-intro" style="margin-bottom: 10px;">
+                    <h2>Monitorowanie</h2>
+                    <p>Zajętość sal na wydziale w czasie rzeczywistym.</p>
+                </div>
+
+                <!-- Monitoring list -->
+                <div class="recommendations-section">
+                    <div class="rec-list" id="monitor-list">
+                        <!-- Cards render dynamically -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation Bar (Custom Minimal Floating Dock) -->
+        <nav class="app-navbar">
+            <button class="nav-item active" id="tab-profile" onclick="switchToTab('profile')">
+                <span class="nav-label">Szukaj</span>
+            </button>
+            <button class="nav-item" id="tab-monitoring" onclick="switchToTab('monitoring')">
+                <span class="nav-label">Monitorowanie</span>
+            </button>
+        </nav>
+
+        <!-- Hidden Diagnostic Log Panel (Slide-up modal) -->
+        <div class="diagnostic-panel" id="diag-panel">
+            <div class="diag-header">
+                <h3>PTI ROCCHIO ALGORITHM LOGS</h3>
+                <button class="btn-close-diag" onclick="toggleDiagnostic()">Gotowe</button>
+            </div>
+            <div class="diag-body" id="rocchio-logs">
+                <div class="log-entry system">Uruchomiono aplikację mobilną MiniInfo.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script connection -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
