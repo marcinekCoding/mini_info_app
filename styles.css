@@ -1003,3 +1003,23 @@ body {
     font-size: 12px;
     padding: 6px 14px;
 }
+
+/* Report Error Button */
+.btn-report {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--crimson-red);
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-report:hover {
+    background: rgba(248, 113, 113, 0.1);
+    border-color: rgba(248, 113, 113, 0.4);
+}

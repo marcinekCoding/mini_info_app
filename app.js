@@ -389,8 +389,8 @@ function renderMonitoring() {
     if (!monitorList) return;
     monitorList.innerHTML = '';
     
-    // Pokaż wszystkie sale posortowane alfabetycznie
-    const sortedRooms = [...rooms].sort((a, b) => a.name.localeCompare(b.name));
+    // Pokaż wszystkie sale posortowane od najpustszych do najbardziej zajętych
+    const sortedRooms = [...rooms].sort((a, b) => a.occupancy - b.occupancy);
     
     sortedRooms.forEach((room, index) => {
         const card = document.createElement('div');
@@ -551,4 +551,76 @@ function toggleDiagnostic() {
         panel.classList.toggle('active');
         addLog("Przełączono stan panelu diagnostycznego.", "system");
     }
+}
+
+// Unified Modal Report Logic
+function openReportModal() {
+    const modal = document.getElementById('report-modal-overlay');
+    if (!modal) return;
+    
+    modal.style.display = 'flex';
+    
+    const select = document.getElementById('modal-report-select');
+    select.innerHTML = '';
+    rooms.forEach(room => {
+        const opt = document.createElement('option');
+        opt.value = room.id;
+        opt.innerText = room.name;
+        select.appendChild(opt);
+    });
+    updateModalSliders();
+}
+
+function closeReportModal() {
+    const modal = document.getElementById('report-modal-overlay');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function updateModalSliders() {
+    const select = document.getElementById('modal-report-select');
+    const roomId = select.value;
+    const room = rooms.find(r => r.id === roomId);
+    if (!room) return;
+    
+    document.getElementById('modal-rep-O').value = room.occupancy;
+    document.getElementById('modal-rep-S').value = room.noise;
+    document.getElementById('modal-rep-D').value = room.dynamics;
+    
+    updateModalRepVal('O', room.occupancy);
+    updateModalRepVal('S', room.noise);
+    updateModalRepVal('D', room.dynamics);
+}
+
+function updateModalRepVal(feature, value) {
+    const label = document.getElementById(`modal-rep-val-${feature}`);
+    if (label) {
+        label.innerText = `${Math.round(value * 100)}%`;
+    }
+}
+
+function submitReportModal() {
+    const select = document.getElementById('modal-report-select');
+    const roomId = select.value;
+    const room = rooms.find(r => r.id === roomId);
+    if (!room) return;
+    
+    const newO = parseFloat(document.getElementById('modal-rep-O').value);
+    const newS = parseFloat(document.getElementById('modal-rep-S').value);
+    const newD = parseFloat(document.getElementById('modal-rep-D').value);
+    
+    room.occupancy = newO;
+    room.noise = newS;
+    room.dynamics = newD;
+    
+    addLog(`Użytkownik zgłosił błąd (Modal) dla sali [${room.name}]: O=${newO.toFixed(2)}, S=${newS.toFixed(2)}, D=${newD.toFixed(2)}`, "danger");
+    
+    closeReportModal();
+    
+    initSliders(); 
+    runSearch();
+    renderMonitoring();
+    
+    alert(`Dziękujemy! Stan sali ${room.name} został zaktualizowany w systemie.`);
 }
