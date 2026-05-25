@@ -29,8 +29,8 @@ const rooms = [
         name: "Salki w Bibliotece",
         capacity: 15,
         occupancy: 0.1, // 10% - 1-2 osoby
-        noise: 0.05,    // Niemal idealna cisza
-        dynamics: 0.05, // Bardzo statycznie
+        noise: 0.05,
+        dynamics: 0.05,
         baseNoise: 0.05,
         baseOccupancy: 0.1,
         baseDynamics: 0.05
@@ -39,9 +39,9 @@ const rooms = [
         id: "112",
         name: "Komputery 112 (Laboratorium)",
         capacity: 24,
-        occupancy: 0.5, // 80% - 19 osób
-        noise: 0.2,     // Cichy gwar, szum komputerów
-        dynamics: 0.2,  // Niski ruch
+        occupancy: 0.5,
+        noise: 0.2,
+        dynamics: 0.2,
         baseNoise: 0.4,
         baseOccupancy: 0.8,
         baseDynamics: 0.3
@@ -50,9 +50,9 @@ const rooms = [
         id: "jetbrains",
         name: "Strefa JETBRAINS",
         capacity: 25,
-        occupancy: 0.6, // 40% - 48 osób
-        noise: 0.7,     // Głośno, gwar kawiarniany
-        dynamics: 0.8,  // Wysoki ruch (przejście)
+        occupancy: 0.6,
+        noise: 0.7,
+        dynamics: 0.8,
         baseNoise: 0.7,
         baseOccupancy: 0.4,
         baseDynamics: 0.8

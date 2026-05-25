@@ -51,7 +51,7 @@ body {
 }
 
 .watermark-bg {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -984,4 +984,22 @@ body {
     height: 100%;
     border-radius: 99px;
     transition: width 0.4s ease-out, background-color 0.4s ease;
+}
+
+/* Best Match Card (First Item) Highlight */
+#search-results-list .rec-card:first-child {
+    border: 2px solid var(--neon-green);
+    background: rgba(163, 230, 53, 0.08);
+    padding: 18px;
+    box-shadow: 0 4px 20px rgba(163, 230, 53, 0.15);
+    margin-bottom: 15px;
+}
+
+#search-results-list .rec-card:first-child .rec-room-info h4 {
+    font-size: 18px;
+}
+
+#search-results-list .rec-card:first-child .rec-match-badge {
+    font-size: 12px;
+    padding: 6px 14px;
 }

@@ -144,10 +144,10 @@ function selectPresetProfile(profileType) {
         selectedAnswers = { q1: 'B', q2: 'C', q3: 'B' };
         addLog("Wczytano gotowy model użytkownika: [Praca w grupie]. Parametryzacja maskowania rozmów.", "system");
     } else if (profileType === 'konsultant') {
-        activeWeights = { O: 0.5, S: 0.3, D: 0.5 };
-        activeQuery = { O: 0.4, S: 0.4, D: 0.4 };
-        selectedAnswers = { q1: 'C', q2: 'B', q3: 'C' };
-        addLog("Wczytano gotowy model użytkownika: [Relax]. Parametryzacja szybkiego dostępu.", "system");
+        activeWeights = { O: 0.5, S: 0.6, D: 0.6 };
+        activeQuery = { O: 0.5, S: 0.75, D: 0.85 };
+        selectedAnswers = { q1: 'C', q2: 'C', q3: 'C' };
+        addLog("Wczytano gotowy model użytkownika: [Relax]. Parametryzacja stref głośnych i bilardowych.", "system");
     }
     
     updateUIFromState();
