@@ -57,7 +57,7 @@ body {
     transform: translate(-50%, -50%);
     width: 140vw;
     object-fit: contain;
-    opacity: 0.05;
+    opacity: 0.1;
     z-index: 0;
     pointer-events: none;
 }

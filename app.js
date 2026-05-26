@@ -50,7 +50,10 @@ function initSliders() {
         card.innerHTML = `
             <div class="room-card-header">
                 <h4>${room.name}</h4>
-                <span class="room-cap-badge">Max: ${room.capacity} os.</span>
+                <div style="display: flex; gap: 8px;">
+                    <span class="room-cap-badge" style="color: var(--neon-green);">Piętro: ${room.floor}</span>
+                    <span class="room-cap-badge">Max: ${room.capacity} os.</span>
+                </div>
             </div>
             <div class="sliders-group">
                 <div class="slider-container">
@@ -354,6 +357,7 @@ function renderRecommendations(results) {
             <div class="rec-card-main">
                 <div class="rec-room-info">
                     <h4>${room.name}</h4>
+                    <span style="font-size: 10px; font-weight: 700; color: var(--neon-green);">Piętro: ${room.floor}</span>
                 </div>
                 <div class="rec-match-badge ${matchClass}">${res.matchPercent}%</div>
             </div>
@@ -416,6 +420,8 @@ function renderMonitoring() {
                 <div class="monitor-meta">
                     <span class="status-dot" style="background-color: ${statusColor};"></span>
                     <span style="color: ${statusColor}; font-weight: 700;">${statusText}</span>
+                    <span class="meta-divider">•</span>
+                    <span>Piętro: ${room.floor}</span>
                     <span class="meta-divider">•</span>
                     <span>Max: ${room.capacity} os.</span>
                 </div>
